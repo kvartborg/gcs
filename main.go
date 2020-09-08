@@ -9,7 +9,6 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"strings"
 	"time"
@@ -66,7 +65,6 @@ func main() {
 	}
 
 	w := client.Bucket(gcsbucket).Object(gcspath + "/" + filepath).NewWriter(tctx)
-	w.ContentType = http.DetectContentType(b)
 	w.CRC32C = crc32.Checksum(b, crc32.MakeTable(crc32.Castagnoli))
 	w.SendCRC32C = true
 
